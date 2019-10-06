@@ -7,3 +7,86 @@
   display: flex;
   align-items: center;
 }
+
+.recipe-list-item img.recipe-list-item-image {
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+  border-radius: 6px;
+}
+
+/* flex item center, the recipe text container (main content) */
+.recipe-list-item .recipe-list-item-text-container {
+  margin-bottom: 10px;
+  flex: 10;
+}
+
+.recipe-list-item .recipe-list-item-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f66e6e;
+}
+
+/* flex item left, the image container */
+.recipe-list-item .recipe-list-item-image-container {
+  /* flex: how item will grow or shrink to fit container space available */
+  /* flex: shorthand for flex-grow, flex-shrink, and flex-basis */
+  /* flex: any unit value will be considered flex-basis value */
+  flex: 1;
+}
+
+/* flex item right, the arrow container */
+.recipe-list-item .recipe-list-item-chevron {
+  flex: 0;
+  margin-right: 10px;
+}
+
+.recipe-list-item .recipe-item-card:hover {
+  background-color: #e6e6e6;
+}
+
+.recipe-list-item img.recipe-list-item-image,
+.recipe-list-item .recipe-list-item-image-container,
+.recipe-list-item .recipe-list-item-text-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* flex container for main content items: image 1, text 10, chevron 0 */
+.recipe-list-item .recipe-item-content-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 6px;
+  min-height: 160px;
+  flex-direction: column;
+}
+
+/* media query for 768px width and larger */
+@media screen and (min-width: 768px) {
+  .recipe-list-item img.recipe-list-item-image,
+  .recipe-list-item .recipe-list-item-image-container,
+  .recipe-list-item .recipe-list-item-text-container {
+    margin: 0;
+    text-align: left;
+  }
+
+  .recipe-list-item .recipe-list-item-image-container {
+    margin-right: 15px;
+  }
+
+  .recipe-list-item img.recipe-list-item-image {
+    border-radius: 6px 0 0 6px;
+  }
+
+  .recipe-list-item .recipe-list-item-text-container {
+    padding: 2px 0 0;
+    min-height: 70;
+  }
+
+  .recipe-list-item .recipe-item-content-container {
+    min-height: 70px;
+    padding: 0;
+    flex-direction: row;
+  }
+}
