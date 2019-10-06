@@ -28,8 +28,13 @@ class App extends Component {
           <div className="recipe-list-item-text-container">
             <section className="recipe-list-item-title">{this.props.title}</section>
             <section className="recipe-list-item-used-ingredients">You have {this.props.missedIngredientCount === 0 ? "all" : this.props.usedIngredientCount} ingredients.</section>
+            {/* JS trick: show/hide element with simple conditional evaluation: */}
+            {/* if first && second both true, RETURN value of second */}
+            {/* but if first is false, abort and do nothing */}
+            {this.props.missedIngredientCount > 0 && <section className="recipe-list-item-missing-ingredients">There's {this.props.missedIngredientCount} ingredients missing.</section>}
           </div>
         </div>
+        <i className="recipe-list-item-chevron glyphicon glyphicon-chevron-right" />
       </div>
     );
   }

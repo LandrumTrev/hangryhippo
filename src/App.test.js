@@ -76,6 +76,7 @@ describe("Recipe List Item", () => {
         .text() // text content of div tag
         .indexOf(`${testUsedIngredientsCount}`) // find the var value in the text
     ).not.toEqual(-1); // to be present somewhere in the .text() (=== -1 would be NOT in text)
+    // here, both "-1" and -1 work in the toEqual() (because testing indexOf a number?)
   });
 
   // ============================================
@@ -83,10 +84,7 @@ describe("Recipe List Item", () => {
   it("should say ALL ingredients used instead of a number, if all ingredients are used", () => {
     const testUsedIngredientsCount = 1;
     const testMissingIngredientsCount = 0;
-    const wrapper = shallow(<App 
-      usedIngredientsCount={testUsedIngredientsCount} 
-      missingIngredientsCount={testMissingIngredientsCount} 
-    />);
+    const wrapper = shallow(<App usedIngredientsCount={testUsedIngredientsCount} missedIngredientCount={testMissingIngredientsCount} />);
 
     expect(
       getElement(wrapper)("section")("recipe-list-item-used-ingredients")
@@ -98,53 +96,26 @@ describe("Recipe List Item", () => {
   });
 
   // ============================================
+
+  it("should show a missing ingredient count if we have missing ingredients", () => {
+    const testMissingIngredientsCount = 1;
+    const wrapper = shallow(<App missedIngredientCount={testMissingIngredientsCount} />);
+
+    expect(
+      getElement(wrapper)("section")("recipe-list-item-missing-ingredients")
+        .text() // between tags of section with this className
+        .indexOf(`${testMissingIngredientsCount}`) // find index of var's value
+    ).not.toEqual("-1"); // and it should not be absent
+  });
+
+  // ============================================
+
+  it("should not show a missing ingredient count if there are no missing ingredients", () => {
+    const testMissingIngredientsCount = 0;
+    const wrapper = shallow(<App missedIngredientCount={testMissingIngredientsCount} />);
+
+    expect(getElement(wrapper)("section")("recipe-list-item-missing-ingredients").length).toEqual(0);
+  });
+
+  // ============================================
 });
-
-// // ============================================
-// PRELIMINARY TESTS
-// // ============================================
-
-// // our first Enzyme DOM test
-// // on first run, we need to make sure that it FAILS,
-// // since it is testing something that doesn't exist yet.
-// it("renders a div with the className set to be an item card", () => {
-//   // create a shallow enzyme wrapper for App component
-//   const wrapper = shallow(<App />);
-//   // then write the expect() function, passing in what you expect
-//   expect(
-//     // expect on the wrapper (App component)
-//     wrapper
-//       // find() returns all divs as an array
-//       .find("div")
-//       // findWhere() iterates all divs (each div iterated is "e")
-//       // and finds each div with a property of className="list-card-item".
-//       // then return the .length of resulting .findWhere()'s array
-//       .findWhere(e => e.props().className === "list-item-card").length
-//   )
-//     // and then we expect() the resulting .length to be: 1.
-//     // if the value in toBe() matches our expect() value, test passes.
-//     .toBe(1);
-// });
-
-// // ============================================
-
-// // second Enzyme test, to see if our mocked DefaultProps render properly
-// it("renders a stringified version of props in the div", () => {
-//   // create shallow Enzyme wrapper for App component
-//   const wrapper = shallow(<App />);
-//   // the test
-//   expect(
-//     // expect on the wrapper (App component)
-//     wrapper
-//       // find() returns all divs as an array
-//       .find("div")
-//       // findWhere() iterates all divs (each div iterated is "e")
-//       // and finds each div with a property of className="list-card-item"
-//       // then return Enzyme's .text(), content rendered inside that/those div(s)
-//       .findWhere(e => e.props().className === "list-item-card")
-//       .text()
-//     // and expect that .text() to be App's defaultProps (after stringifying JSON)
-//   ).toBe(JSON.stringify(App.defaultProps));
-// });
-
-// // ============================================
