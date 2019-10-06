@@ -67,7 +67,37 @@ describe("Recipe List Item", () => {
 
   // ============================================
 
-  
+  it("should show the number of ingredients used", () => {
+    const testUsedIngredientsCount = 3;
+    const wrapper = shallow(<App usedIngredientsCount={testUsedIngredientsCount} />);
+
+    expect(
+      getElement(wrapper)("section")("recipe-list-item-used-ingredients")
+        .text() // text content of div tag
+        .indexOf(`${testUsedIngredientsCount}`) // find the var value in the text
+    ).not.toEqual(-1); // to be present somewhere in the .text() (=== -1 would be NOT in text)
+  });
+
+  // ============================================
+
+  it("should say ALL ingredients used instead of a number, if all ingredients are used", () => {
+    const testUsedIngredientsCount = 1;
+    const testMissingIngredientsCount = 0;
+    const wrapper = shallow(<App 
+      usedIngredientsCount={testUsedIngredientsCount} 
+      missingIngredientsCount={testMissingIngredientsCount} 
+    />);
+
+    expect(
+      getElement(wrapper)("section")("recipe-list-item-used-ingredients")
+        .text() // between the section element tags with the above className
+        .indexOf("all") // the location of the characters/word: all
+    ).not.toEqual("-1"); // should be present (not absent) in the .text() string
+    // NOTE! this code requires "-1" (string), NOT -1 (number) for .toEqual()
+    // CAUSE? using the ternary operator JS in JSX?
+  });
+
+  // ============================================
 });
 
 // // ============================================

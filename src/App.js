@@ -27,6 +27,7 @@ class App extends Component {
           </div>
           <div className="recipe-list-item-text-container">
             <section className="recipe-list-item-title">{this.props.title}</section>
+            <section className="recipe-list-item-used-ingredients">You have {this.props.missedIngredientCount === 0 ? "all" : this.props.usedIngredientCount} ingredients.</section>
           </div>
         </div>
       </div>
