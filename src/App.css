@@ -37,7 +37,7 @@
 
 /* flex item right, the arrow container */
 .recipe-list-item .recipe-list-item-chevron {
-  flex: 0;
+  /* flex: 0; */
   margin-right: 10px;
 }
 

@@ -1,3 +1,4 @@
+import { ReactComponent as Chevron } from './chevron-right.svg'
 import React, { Component } from "react";
 import "./App.css";
 
@@ -34,7 +35,7 @@ class App extends Component {
             {this.props.missedIngredientCount > 0 && <section className="recipe-list-item-missing-ingredients">There's {this.props.missedIngredientCount} ingredients missing.</section>}
           </div>
         </div>
-        <i className="recipe-list-item-chevron glyphicon glyphicon-chevron-right" />
+        <Chevron className="recipe-list-item-chevron"/>
       </div>
     );
   }
