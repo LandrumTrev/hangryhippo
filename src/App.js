@@ -26,8 +26,7 @@ class App extends Component {
             />
           </div>
           <div className="recipe-list-item-text-container">
-            {/* text content */}
-            {/* text content */}
+            <section className="recipe-list-item-title">{this.props.title}</section>
           </div>
         </div>
       </div>
