@@ -7,6 +7,14 @@ import App from "./App";
 
 // ============================================
 
+// Curried helper function to eliminate repeating this code,
+// note () instead of {} so we're returning the result.
+// Finds a type of element whose classes contain a specified class
+const getElement = wrapper => elementType => classToSearchFor =>
+  wrapper.find(elementType).findWhere(e => e.props().className && e.props().className.indexOf(classToSearchFor) !== -1);
+
+// ============================================
+
 // the default Jest test
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -15,49 +23,75 @@ it("renders without crashing", () => {
 });
 
 // ============================================
-
-// our first Enzyme DOM test
-// on first run, we need to make sure that it FAILS,
-// since it is testing something that doesn't exist yet.
-it("renders a div with the className set to be an item card", () => {
-  // create a shallow enzyme wrapper for App component
-  const wrapper = shallow(<App />);
-  // then write the expect() function, passing in what you expect
-  expect(
-    // expect on the wrapper (App component)
-    wrapper
-      // find() returns all divs as an array
-      .find("div")
-      // findWhere() iterates all divs (each div iterated is "e")
-      // and finds each div with a property of className="list-card-item".
-      // then return the .length of resulting .findWhere()'s array
-      .findWhere(e => e.props().className === "list-item-card").length
-  )
-    // and then we expect() the resulting .length to be: 1.
-    // if the value in toBe() matches our expect() value, test passes.
-    .toBe(1);
-});
-
+// NEW TESTS
 // ============================================
 
-// second Enzyme test, to see if our mocked DefaultProps render properly
-it("renders a stringified version of props in the div", () => {
-  // create shallow Enzyme wrapper for App component
-  const wrapper = shallow(<App />);
-  // the test
-  expect(
-    // expect on the wrapper (App component)
-    wrapper
-      // find() returns all divs as an array
-      .find("div")
-      // findWhere() iterates all divs (each div iterated is "e")
-      // and finds each div with a property of className="list-card-item"
-      // then return Enzyme's .text(), content rendered inside that/those div(s)
-      .findWhere(e => e.props().className === "list-item-card")
-      .text()
-    // and expect that .text() to be App's defaultProps (after stringifying JSON)
-  ).toBe(JSON.stringify(App.defaultProps));
+// describe() function used to nicely format a titled section of tests
+describe("Recipe List Item", () => {
+  // first test, checks the class of main div of component
+  it("renders a div with the className prop set to be an item card", () => {
+    const wrapper = shallow(<App />);
+
+    expect(getElement(wrapper)("div")("list-item-card").length).toBe(1);
+  });
+
+  // test to see if linked image is displayed with alt text
+  it("should display the image supplied by the props", () => {
+    // dummy content to render into component's actual <img> element (NOT using component's actual data)
+    const testAlt = `I'm Batman`;
+    const testImage = "http://www.vectortemplates.com/raster/batman-logo-big.gif";
+    const wrapper = shallow(<App title={testAlt} image={testImage} />);
+
+    expect(getElement(wrapper)("img")("recipe-list-item-image").props().alt).toEqual(testAlt);
+    expect(getElement(wrapper)("img")("recipe-list-item-image").props().src).toEqual(testImage);
+  });
 });
 
-// ============================================
+// // ============================================
+// PRELIMINARY TESTS
+// // ============================================
 
+// // our first Enzyme DOM test
+// // on first run, we need to make sure that it FAILS,
+// // since it is testing something that doesn't exist yet.
+// it("renders a div with the className set to be an item card", () => {
+//   // create a shallow enzyme wrapper for App component
+//   const wrapper = shallow(<App />);
+//   // then write the expect() function, passing in what you expect
+//   expect(
+//     // expect on the wrapper (App component)
+//     wrapper
+//       // find() returns all divs as an array
+//       .find("div")
+//       // findWhere() iterates all divs (each div iterated is "e")
+//       // and finds each div with a property of className="list-card-item".
+//       // then return the .length of resulting .findWhere()'s array
+//       .findWhere(e => e.props().className === "list-item-card").length
+//   )
+//     // and then we expect() the resulting .length to be: 1.
+//     // if the value in toBe() matches our expect() value, test passes.
+//     .toBe(1);
+// });
+
+// // ============================================
+
+// // second Enzyme test, to see if our mocked DefaultProps render properly
+// it("renders a stringified version of props in the div", () => {
+//   // create shallow Enzyme wrapper for App component
+//   const wrapper = shallow(<App />);
+//   // the test
+//   expect(
+//     // expect on the wrapper (App component)
+//     wrapper
+//       // find() returns all divs as an array
+//       .find("div")
+//       // findWhere() iterates all divs (each div iterated is "e")
+//       // and finds each div with a property of className="list-card-item"
+//       // then return Enzyme's .text(), content rendered inside that/those div(s)
+//       .findWhere(e => e.props().className === "list-item-card")
+//       .text()
+//     // and expect that .text() to be App's defaultProps (after stringifying JSON)
+//   ).toBe(JSON.stringify(App.defaultProps));
+// });
+
+// // ============================================

@@ -15,9 +15,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="list-item-card">
-        {/* replace Hello World with default props */}
-        {JSON.stringify(this.props)}
+      <div className="list-item-card recipe-list-item">
+        <div className="recipe-item-content-container">
+          <div className="recipe-list-item-image-container">
+            {/* prettier-ignore */}
+            <img 
+              src={this.props.image} 
+              className="img-responsive recipe-list-item-image" 
+              alt={this.props.title} 
+            />
+          </div>
+          <div className="recipe-list-item-text-container">
+            {/* text content */}
+            {/* text content */}
+          </div>
+        </div>
       </div>
     );
   }
