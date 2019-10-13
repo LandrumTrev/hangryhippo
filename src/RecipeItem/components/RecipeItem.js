@@ -2,10 +2,10 @@
 // because it is a presentation component without its own state
 // note the use of () instead of
 
-import React from "react";
+import React from "./node_modules/react";
 import "../styles/RecipeItem.css";
 import { ReactComponent as Chevron } from "./chevron-right.svg";
-import PropTypes from "prop-types";
+import PropTypes from "./node_modules/prop-types";
 
 const propTypes = {
   id: PropTypes.number,
