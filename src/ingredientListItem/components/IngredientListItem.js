@@ -23,6 +23,6 @@ const IngredientListItem = props => (
   </div>
 );
 
-IngredientListItem.proptypes = propTypes;
+IngredientListItem.propTypes = propTypes;
 
 export default IngredientListItem;
