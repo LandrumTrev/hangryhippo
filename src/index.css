@@ -1,3 +1,5 @@
+/* default React styles */
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -10,4 +12,32 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* additional HangryHippo styles */
+
+#root {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #25b7d3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.hangry-panel {
+  background-color: #ffffde;
+}
+
+@media screen and (min-width: 1200px) {
+  .hangry-panel {
+    height: 100%;
+  }
 }
